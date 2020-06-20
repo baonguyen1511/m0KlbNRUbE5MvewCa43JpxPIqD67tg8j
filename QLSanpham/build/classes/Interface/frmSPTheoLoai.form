@@ -69,7 +69,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="S&#x1ea3;n ph&#x1ea9;m theo lo&#x1ea1;i"/>
+        <Property name="text" type="java.lang.String" value="S&#x1ea2;N PH&#x1ea8;M THEO LO&#x1ea0;I"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">

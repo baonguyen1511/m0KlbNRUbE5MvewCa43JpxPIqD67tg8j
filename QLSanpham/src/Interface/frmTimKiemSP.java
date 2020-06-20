@@ -5,69 +5,17 @@
  */
 package Interface;
 
-import Proccess.LoaiSP;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Administrator
  */
-public class frmSPTheoLoai extends javax.swing.JFrame {
-
-    LoaiSP sp = new LoaiSP();
-    DefaultTableModel tableModel = new DefaultTableModel();
-
-    public final void ShowDataCombo() {
-        ResultSet result = null;
-        try {
-            result = sp.ShowLoaiSP();
-            while (result.next()) {
-                //Them du lieu vao Combobox 
-                cbxLoaiSP.addItem(result.getString("Maloai"));
-            }
-        } catch (SQLException e) {
-        }
-    }
-    //Hiển thị các SP theo Maloai vào jTable:  jtSanpham 
-
-    public void ClearData() throws SQLException {
-        //Lay chi so dong cuoi cung 
-        int n = tableModel.getRowCount() - 1;
-        for (int i = n; i >= 0; i--) {
-            tableModel.removeRow(i);//Remove tung dong          
-        }
-    }
-
-    public final void ShowData(String ml) {
-        ResultSet result = null;
-        result = sp.ShowSPTheoloai(ml);
-        try {
-            ClearData();
-            while (result.next()) {
-                String rows[] = new String[4];
-                rows[0] = result.getString(1);
-                rows[1] = result.getString(2);
-                rows[2] = result.getString(3);
-                rows[3] = result.getString(4);
-                tableModel.addRow(rows);
-            }
-        } catch (SQLException e) {
-        }
-    }
+public class frmTimKiemSP extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmSPTheoLoai
+     * Creates new form frmTimKiemSP
      */
-    public frmSPTheoLoai() {
+    public frmTimKiemSP() {
         initComponents();
-        ShowDataCombo();
-        String[] colsName = {"Mã SP", "Tên SP", "Giá bán", "Loại"};
-        // đặt tiêu đề cột cho tableModel 
-        tableModel.setColumnIdentifiers(colsName);
-        // kết nối jtable với tableModel   
-        jTableSanPham.setModel(tableModel);
     }
 
     /**
@@ -79,27 +27,42 @@ public class frmSPTheoLoai extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        buttonGroupTimTheo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        inputTenSP = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        cbxLoaiSP = new javax.swing.JComboBox<>();
+        inputGiaTu = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        inputGiaDen = new javax.swing.JTextField();
+        rbtnTheoTen = new javax.swing.JRadioButton();
+        rbtnTheoGia = new javax.swing.JRadioButton();
+        btnSearch = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSanPham = new javax.swing.JTable();
         btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
-        setResizable(false);
-
-        jLabel1.setText("SẢN PHẨM THEO LOẠI");
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jLabel2.setText("Chọn loại sản phẩm:");
+        jLabel1.setText("Tên sản phẩm:");
 
-        cbxLoaiSP.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbxLoaiSPItemStateChanged(evt);
+        jLabel2.setText("Giá từ:");
+
+        jLabel3.setText("đến");
+
+        buttonGroupTimTheo.add(rbtnTheoTen);
+        rbtnTheoTen.setText("Theo tên");
+
+        buttonGroupTimTheo.add(rbtnTheoGia);
+        rbtnTheoGia.setText("Theo giá");
+
+        btnSearch.setText("Tìm kiếm");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -109,9 +72,27 @@ public class frmSPTheoLoai extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbxLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputTenSP)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtnTheoTen))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputGiaTu)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(10, 10, 10)
+                        .addComponent(inputGiaDen, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbtnTheoGia)))
+                .addGap(32, 32, 32))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(btnSearch)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -119,10 +100,22 @@ public class frmSPTheoLoai extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(inputTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbtnTheoTen))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cbxLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inputGiaTu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(inputGiaDen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbtnTheoGia))
+                .addGap(18, 18, 18)
+                .addComponent(btnSearch)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel4.setText("TÌM KIẾM SẢN PHẨM");
 
         jTableSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,7 +125,7 @@ public class frmSPTheoLoai extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên sản phẩm", "Đơn giá", "Loại SP"
+                "Mã SP", "Tên sản phẩm", "Giá bán", "Loại SP"
             }
         ) {
             Class[] types = new Class [] {
@@ -148,6 +141,11 @@ public class frmSPTheoLoai extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableSanPhamMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableSanPham);
@@ -169,34 +167,33 @@ public class frmSPTheoLoai extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(139, 139, 139))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 5, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(169, 169, 169)
-                        .addComponent(btnExit)))
+                .addGap(163, 163, 163)
+                .addComponent(btnExit)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnExit)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -204,16 +201,17 @@ public class frmSPTheoLoai extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxLoaiSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbxLoaiSPItemStateChanged
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        String ml = cbxLoaiSP.getSelectedItem().toString();
-        ShowData(ml);
-    }//GEN-LAST:event_cbxLoaiSPItemStateChanged
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
-        this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void jTableSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSanPhamMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTableSanPhamMouseClicked
 
     /**
      * @param args the command line arguments
@@ -232,31 +230,39 @@ public class frmSPTheoLoai extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmSPTheoLoai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTimKiemSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmSPTheoLoai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTimKiemSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmSPTheoLoai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTimKiemSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmSPTheoLoai.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmTimKiemSP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmSPTheoLoai().setVisible(true);
+                new frmTimKiemSP().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
-    private javax.swing.JComboBox<String> cbxLoaiSP;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.ButtonGroup buttonGroupTimTheo;
+    private javax.swing.JTextField inputGiaDen;
+    private javax.swing.JTextField inputGiaTu;
+    private javax.swing.JTextField inputTenSP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableSanPham;
+    private javax.swing.JRadioButton rbtnTheoGia;
+    private javax.swing.JRadioButton rbtnTheoTen;
     // End of variables declaration//GEN-END:variables
 }

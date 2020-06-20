@@ -13,7 +13,7 @@ import java.sql.SQLException;
  *
  * @author Administrator
  */
-public class LoaiSP {
+public class SanPham {
 
     public Connect cn = new Connect();
     //Truy van tat ca du lieu trong Table LoaiSP 
@@ -28,25 +28,6 @@ public class LoaiSP {
     public ResultSet ShowLoaiSP(String ml) throws SQLException {
         String sql = "SELECT * FROM LoaiSP where Maloai='" + ml + "'";
         return cn.LoadData(sql);
-    }
-    //Theo moi 1 dong du lieu vao table LoaiSP 
-
-    public void InsertData(String ml, String tl) throws SQLException {
-        String sql = "INSERT INTO LoaiSP values('" + ml + "',N'" + tl + "')";
-        cn.UpdateData(sql);
-    }
-    //Dieu chinh 1 dong du lieu vao table LoaiSP 
-
-    public void EditData(String ml, String tl) throws SQLException {
-        String sql = "Update LoaiSP set Tenloai=N'" + tl
-                + "' where Maloai='" + ml + "'";
-        cn.UpdateData(sql);
-    }
-    //Xoa 1 dong du lieu vao table LoaiSP 
-
-    public void DeleteData(String ml) throws SQLException {
-        String sql = "Delete from LoaiSP where Maloai='" + ml + "'";
-        cn.UpdateData(sql);
     }
 
     //Truy van lieu trong Table Sanpham theo Maloai 
@@ -64,7 +45,7 @@ public class LoaiSP {
     //Truy van du lieu trong Table Sanpham theo MaSP 
 
     public ResultSet ShowSPTheoma(String ma) throws SQLException {
-        String sql = "SELECT MaSP,TenSP,Dongia,L.Maloai, TenloaiFROM Sanpham S, LoaiSP L where L.Maloai=S.Maloai and MaSP='" + ma + "'";
+        String sql = "SELECT MaSP,TenSP,Dongia,L.Maloai, Tenloai  FROM Sanpham S, LoaiSP L where L.Maloai=S.Maloai and MaSP='" + ma + "'";
         return cn.LoadData(sql);
     }
     //Truy van du lieu trong Table Sanpham theo gia  
