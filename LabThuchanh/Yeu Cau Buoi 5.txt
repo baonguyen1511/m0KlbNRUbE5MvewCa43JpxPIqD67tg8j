@@ -1,0 +1,31 @@
+NỘI DUNG Thực hành JAVA buổi 5
+- Lập trình giao diện nâng cao kết nối đến csdl.
+- Đọc các hướng dẫn và làm bài tập tương ứng.
+- Cuối buổi giáo viên sẽ hỏi và vấn đáp code.
+
+
+- Phần thi sẽ bao gồm 3 phần:
+	+ Thiết kế giao diện: ví dụ quản lý gì đó như sinh viên, học sinh, giảng viên, giáo viên, môn học, ...
+	+ Viết xử lý.
+	+ Kết nối csdl và lưu trữ thông tin
+==> do đó các bạn tập trung làm các bài tập cho quen và nắm kiến thức vì thi sẽ 
+- Không cho sử dụng tài liệu.
+- Không internet, không usb, điện thoại, ...
+- Mỗi bạn 1 đề khác nhau. Mỗi tiêu chí đều có điểm, làm ko được thì ko có điểm tiêu chí đó.
+- Thời gian làm bài là 90 phút từ 7h30 đến 9h. Sau làm xong, giáo viên sẽ chấm, cộng điểm và công bố điểm. Giải quyết khiếu nại. Vô điểm, ký tên và về.
+
+Các bạn học và ôn để nắm kiến thức cho kỹ từ việc thiết kế giao diện, đến việc xử lý thao tác trên giao diện và kết nối đến cơ sở dữ liệu.
+
+
+Cách kết nối đến cơ sở dữ liệu sql server
+B1. Vào tools -> library check có thư viện nào kết nối đến csdl dạng sqljdbc chưa.
+Nếu chưa thì lên mạng download thư viện sqljdbc của microsoft về, giải nén ra.
+B2. Vào tools -> library tạo tên thư viện mới rồi add file rar của sqljdbc vào.
+B3. Vào project -> libraries -> add tên thư viện ở B2 vào.
+B4. Mở Sql Server Configuration Manager -> SQL Server Network Configuration -> Chọn protocol tương ứng rồi Enable TCP/IP. Click đối vào và Mở tab IP Address --> Kéo xuống dưới cùng chỗ TCP Port: gõ 1433 vào.
+B5. Chọn Sql Services --> chọn SQL Server tương ứng rồi bấm restart.
+B6. Rồi vào project code chỉnh String url = "jdbc:sqlserver://pc050\\SQLEXPRESS:1433;databaseName=QLSanpham;integratedSecurity=true"; Lưu ý pc050 là tên máy ở trường và SQLEXPRESS đang xài. Chú ý tạo user login trước bằng Sql Management Studio.
+
+
+Lưu ý trường hợp muốn login bằng chứng thực của windows thì làm như sau:
+B1: Copy file sqljdbc_auth.dll ở folder enu\auth\môi trường\ vào folder C:\Program Files\Java\jdk1.8.0_111\jre\lib và C:\Program Files\Java\jdk1.8.0_111\jre\bin tương ứng trên máy
