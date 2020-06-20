@@ -117,6 +117,7 @@ public class frmDanhmucLoaiSP extends javax.swing.JFrame {
         jTableLoaiSP = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
         setResizable(false);
 
         jLabel1.setText("DANH MỤC LOẠI SẢN PHẨM");

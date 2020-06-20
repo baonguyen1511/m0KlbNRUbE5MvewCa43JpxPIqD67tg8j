@@ -48,4 +48,10 @@ public class LoaiSP {
         String sql = "Delete from LoaiSP where Maloai='" + ml + "'";
         cn.UpdateData(sql);
     }
+
+    //Truy van lieu trong Table Sanpham theo Maloai 
+    public ResultSet ShowSPTheoloai(String ml) {
+        String sql = "SELECT MaSP,TenSP,Dongia,Tenloai FROM Sanpham S, LoaiSP L where L.Maloai = S.Maloai and L.Maloai ='" + ml + "'  ";
+        return cn.LoadData(sql);
+    }
 }
